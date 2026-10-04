@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Sandbox Chat</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <script src="/static/app.js" defer></script>
+  </head>
+  <body>
+    <button id="sidebar-backdrop" class="sidebar-backdrop" aria-label="Close conversations" hidden></button>
+    <aside id="sidebar" class="sidebar" aria-label="Conversations">
+      <a class="brand" href="/" aria-label="Sandbox Chat home"><span class="brand-icon" aria-hidden="true">s</span>Sandbox Chat</a>
+      <button id="new-thread" class="new-thread" disabled><span aria-hidden="true">+</span> New conversation</button>
+      <div class="section-label">Conversations</div>
+      <nav id="thread-list" class="thread-list" aria-label="Conversation history"></nav>
+      <p id="thread-list-empty" class="sidebar-empty">Loading conversations…</p>
+      <div class="sidebar-footer"><span class="status-dot" aria-hidden="true"></span><span>Powered by Pydantic AI</span></div>
+    </aside>
+
+    <main class="main">
+      <header class="header">
+        <button id="toggle-sidebar" class="icon-button menu-button" aria-label="Open conversations" aria-expanded="false" aria-controls="sidebar">☰</button>
+        <div class="header-heading"><h1 id="conversation-title">Your workspace</h1><p id="sandbox-status">A little room to think and build.</p></div>
+        <span id="model-name" class="model-name" title="Ollama model">Ollama</span>
+      </header>
+
+      <div id="global-error" class="global-error" role="alert" hidden><span id="global-error-text"></span><button id="dismiss-error" class="icon-button" aria-label="Dismiss error">×</button></div>
+
+      <div id="chat-scroll" class="chat-scroll">
+        <section id="welcome" class="welcome" aria-labelledby="welcome-title">
+          <div class="welcome-icon" aria-hidden="true">✳</div>
+          <p class="eyebrow">A fresh perspective</p>
+          <h2 id="welcome-title">What’s on your mind?</h2>
+          <p id="welcome-description">Chat with your Ollama model. Run code in a sandbox that stays with your conversation.</p>
+          <button id="welcome-new-thread" class="primary-button" disabled>Start a conversation <span aria-hidden="true">↗</span></button>
+        </section>
+        <div id="messages" class="messages" role="log" aria-label="Chat messages"></div>
+      </div>
+
+      <div class="composer-area">
+        <div id="thread-error" class="thread-error" role="alert" hidden></div>
+        <form id="message-form" class="composer">
+          <label class="sr-only" for="message-input">Message</label>
+          <textarea id="message-input" rows="1" maxlength="32000" placeholder="Start a conversation to send a message" disabled></textarea>
+          <button id="send-message" class="send-button" type="submit" aria-label="Send message" disabled><span aria-hidden="true">↑</span></button>
+        </form>
+        <p class="composer-hint"><span>Enter to send · Shift + Enter for a new line</span><span id="sandbox-hint">Sandbox expires after 10 minutes of inactivity.</span></p>
+      </div>
+    </main>
+    <div id="announcer" class="sr-only" role="status" aria-live="polite"></div>
+  </body>
+</html>
